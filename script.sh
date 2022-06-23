@@ -103,7 +103,7 @@ function writeResult() {
     echo "$localResult"
   elif [ "$writeToFile" = "1" ]; then
     echo "$localResult" >>result.txt
-  elif [ "$2" = "not changed" ]; then
+  elif [ "$2" = "changed" ]; then
      if [ "$browser" = "?" ]
      then
        xdg-open "$1"
