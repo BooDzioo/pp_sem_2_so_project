@@ -41,7 +41,7 @@ function readUrlsFromFile() {
   k=0
   while IFS= read -r line; do
     urls[k]="$line"
-    k=$((k+1))
+    k=$((k + 1))
   done <"$filename"
 }
 
@@ -105,17 +105,16 @@ function writeResult() {
   elif [ "$writeToFile" = "1" ]; then
     echo "$localResult" >>result.txt
   elif [ "$2" = "changed" ]; then
-     if [ "$browser" = "?" ]
-     then
-       xdg-open "$1"
-     else
-       echo "$1" | xargs "$browser"
-     fi
+    if [ "$browser" = "?" ]; then
+      xdg-open "$1"
+    else
+      echo "$1" | xargs "$browser"
+    fi
   fi
 }
 
 removeFiles() {
-  for pageName in ${1}; do
+  for pageName in "$@"; do
     rm "$pageName"
   done
 }
