@@ -1,8 +1,8 @@
 #!/bin/bash
 
-timeout=300
+timeout=600
 file="?"
-browser="firefox"
+browser="?"
 runOnlyOnce="0"
 writeToFile="0"
 writeToScreen="0"
@@ -56,7 +56,6 @@ function parseArguments() {
       ;;
     b)
       browser=${OPTARG}
-      echo browser "$browser"
       ;;
     h)
       printHelp
@@ -77,7 +76,7 @@ function parseArguments() {
   done
   shift $(($OPTIND - 1))
 
-  if [ "$file" != "?" ]; then
+  if [ "$file" = "?" ]; then
     i=0
     for arg in "$@"; do
       urls[i]="$arg"
@@ -105,7 +104,12 @@ function writeResult() {
   elif [ "$writeToFile" = "1" ]; then
     echo "$localResult" >>result.txt
   elif [ "$2" = "not changed" ]; then
-    echo "$1" | xargs "$browser"
+     if [ "$browser" = "?" ]
+     then
+       xdg-open "$1"
+     else
+       echo "$1" | xargs "$browser"
+     fi
   fi
 }
 
