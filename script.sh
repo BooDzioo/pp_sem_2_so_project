@@ -41,6 +41,7 @@ function readUrlsFromFile() {
   k=0
   while IFS= read -r line; do
     urls[k]="$line"
+    k=$((k+1))
   done <"$filename"
 }
 
